@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui-pro'
+    '@nuxt/ui-pro',
+    'nuxt-echarts'
   ],
 
   devtools: {
@@ -10,12 +11,25 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-
+  ui: {
+    fonts: false
+  },
   routeRules: {
     '/': { prerender: true }
   },
 
   compatibilityDate: '2025-01-15',
+  echarts: {
+    charts: ['BarChart', 'MapChart', 'LineChart', 'EffectScatterChart', 'LinesChart'],
+    components: [
+      'DatasetComponent',
+      'GridComponent',
+      'TooltipComponent',
+      'ToolboxComponent',
+      'GeoComponent',
+      'VisualMapComponent'
+    ]
+  },
 
   eslint: {
     config: {

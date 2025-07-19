@@ -1,0 +1,20 @@
+[
+  {
+    "name": "福建省",
+    "people": [
+      {
+        "name": "唐凯",
+        "avatar": "/people/唐凯.png"
+      }
+    ]
+  },
+  {
+    "name": "湖南省",
+    "people": [
+      {
+        "name": "张酉哲",
+        "avatar": "/people/张酉哲.png"
+      }
+    ]
+  }
+]
