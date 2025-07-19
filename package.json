@@ -9,12 +9,14 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "deploy": "nuxt generate && gh-pages -d .output/public"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.57",
     "@iconify-json/simple-icons": "^1.2.43",
     "@nuxt/ui-pro": "^3.2.0",
+    "gh-pages": "^6.3.0",
     "nuxt": "^4.0.0",
     "nuxt-echarts": "^0.3.3"
   },
