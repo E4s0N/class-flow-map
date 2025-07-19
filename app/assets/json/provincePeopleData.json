@@ -4,7 +4,178 @@
     "people": [
       {
         "name": "唐凯",
+        "work": "泉州",
         "avatar": "/people/唐凯.png"
+      },
+      {
+        "name": "夏玉政",
+        "work": "厦门",
+        "avatar": "/people/夏玉政.png"
+      }
+    ]
+  },
+  {
+    "name": "广东省",
+    "people": [
+      {
+        "name": "黄思婷",
+        "work": "深圳",
+        "avatar": "/people/黄思婷.png"
+      },
+      {
+        "name": "易雪松",
+        "work": "深圳",
+        "avatar": "/people/易雪松.png"
+      },
+      {
+        "name": "谢瑶",
+        "work": "深圳",
+        "avatar": "/people/谢瑶.png"
+      },
+      {
+        "name": "钟曲颖",
+        "work": "深圳",
+        "avatar": "/people/钟曲颖.png"
+      },
+      {
+        "name": "钟涛",
+        "work": "深圳",
+        "avatar": "/people/钟涛.png"
+      },
+      {
+        "name": "饶子文",
+        "work": "深圳",
+        "avatar": "/people/饶子文.png"
+      },
+      {
+        "name": "张琨",
+        "work": "深圳",
+        "avatar": "/people/张琨.png"
+      },
+      {
+        "name": "钟浩林",
+        "work": "深圳",
+        "avatar": "/people/钟浩林.png"
+      },
+      {
+        "name": "刘东旭",
+        "work": "深圳",
+        "avatar": "/people/刘东旭.png"
+      },
+      {
+        "name": "周斌",
+        "work": "深圳",
+        "avatar": "/people/周斌.png"
+      },
+      {
+        "name": "陈基勉",
+        "work": "深圳",
+        "avatar": "/people/陈基勉.png"
+      }
+    ]
+  },
+  {
+    "name": "海南省",
+    "people": [
+      {
+        "name": "边喻琪",
+        "work": "海南",
+        "avatar": "/people/边喻琪.png"
+      }
+    ]
+  },
+  {
+    "name": "江苏省",
+    "people": [
+      {
+        "name": "宋无覃",
+        "work": "江苏",
+        "avatar": "/people/宋无覃.png"
+      }
+    ]
+  },
+  {
+    "name": "黑龙江省",
+    "people": [
+      {
+        "name": "鄢莹璋",
+        "work": "哈尔滨",
+        "avatar": "/people/鄢莹璋.png"
+      }
+    ]
+  },
+    {
+    "name": "浙江省",
+    "people": [
+      {
+        "name": "谢琦",
+        "work": "杭州",
+        "avatar": "/people/谢琦.png"
+      },
+      {
+        "name": "张明",
+        "work": "杭州",
+        "avatar": "/people/张明.png"
+      }
+    ]
+  },
+  {
+    "name": "北京市",
+    "people": [
+      {
+        "name": "邱祎",
+        "work": "北京",
+        "avatar": "/people/邱祎.png"
+      },
+      {
+        "name": "钟正桥",
+        "work": "北京",
+        "avatar": "/people/钟正桥.png"
+      },
+      {
+        "name": "严励",
+        "work": "北京",
+        "avatar": "/people/严励.png"
+      },
+      {
+        "name": "卢晨凡",
+        "work": "北京",
+        "avatar": "/people/卢晨凡.png"
+      }
+    ]
+  },
+  {
+    "name": "上海市",
+    "people": [
+      {
+        "name": "袁钰",
+        "work": "上海",
+        "avatar": "/people/袁钰.png"
+      },
+      {
+        "name": "袁雨非",
+        "work": "上海",
+        "avatar": "/people/袁雨非.png"
+      },
+      {
+        "name": "赖志锋",
+        "work": "上海",
+        "avatar": "/people/赖志锋.png"
+      },
+      {
+        "name": "夏侯雨欢",
+        "work": "上海",
+        "avatar": "/people/夏侯雨欢.png"
+      },
+      {
+        "name": "黄强",
+        "work": "上海",
+        "avatar": "/people/黄强.png"
+      },
+      {
+        "name": "胡新全",
+        "work": "上海",
+        "avatar": "/people/胡新全.png"
       }
     ]
   },
@@ -13,8 +184,95 @@
     "people": [
       {
         "name": "张酉哲",
+        "work": "长沙",
         "avatar": "/people/张酉哲.png"
+      },
+      {
+        "name": "李耀",
+        "work": "长沙",
+        "avatar": "/people/李耀.png"
+      },
+      {
+        "name": "陈欣",
+        "work": "长沙",
+        "avatar": "/people/陈欣.png"
       }
+    ]
+  },
+  {
+    "name": "江西省",
+    "people": [
+      {
+        "name": "严志勇",
+        "work": "南昌",
+        "avatar": "/people/严志勇.png"
+      },
+      {
+        "name": "吴琎",
+        "work": "南昌",
+        "avatar": "/people/吴琎.png"
+      },
+      {
+        "name": "童鑫",
+        "work": "南昌",
+        "avatar": "/people/童鑫.png"
+      },
+      {
+        "name": "彭晰",
+        "work": "南昌",
+        "avatar": "/people/彭晰.png"
+      },
+      {
+        "name": "张楚枫",
+        "work": "南昌",
+        "avatar": "/people/张楚枫.png"
+      },
+      {
+        "name": "张兆华",
+        "work": "宜春",
+        "avatar": "/people/张兆华.png"
+      },
+      {
+        "name": "郭员畅",
+        "work": "宜春",
+        "avatar": "/people/郭员畅.png"
+      },
+      {
+        "name": "方书敏",
+        "work": "宜春",
+        "avatar": "/people/方书敏.png"
+      },
+      {
+        "name": "徐洋",
+        "work": "宜春",
+        "avatar": "/people/徐洋.png"
+      },
+      {
+        "name": "李宏",
+        "work": "宜春",
+        "avatar": "/people/李宏.png"
+      },
+      {
+        "name": "赖聪聪",
+        "work": "新余",
+        "avatar": "/people/赖聪聪.png"
+      },
+      {
+        "name": "罗志成",
+        "work": "新余",
+        "avatar": "/people/罗志成.png"
+      },
+      {
+        "name": "李松",
+        "work": "分宜",
+        "avatar": "/people/李松.png"
+      },
+      {
+        "name": "欧阳抱朴",
+        "work": "分宜",
+        "avatar": "/people/欧阳抱朴.png"
+      }
+
     ]
   }
 ]

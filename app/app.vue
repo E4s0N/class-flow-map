@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -11,8 +12,8 @@ useHead({
   }
 })
 
-const title = 'Nuxt Starter Template'
-const description = 'Nuxt UI Pro is a collection of premium Vue components built on top of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.'
+const title = '拾光一班'
+const description = '这里是分宜中学 2014 届高三 1 班的线上家园，是承载着青春记忆与师生情谊的港湾。在班主任张小勇老师的悉心浇灌下，我们曾在分宜中学的教室里并肩奋斗，以浓郁的学风为笔，以团结的情谊为墨，书写下属于青春的炽热篇章。'
 
 useSeoMeta({
   title,
@@ -23,34 +24,52 @@ useSeoMeta({
   twitterImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3VpLXByby1zdGFydGVyLm51eHQuZGV2IiwiaWF0IjoxNzM5NDYzMzk4fQ.XLzPkSW6nRbPW07QO1RkMwz_RAPA4KfeyrWrK3li9YI.jpg?theme=light',
   twitterCard: 'summary_large_image'
 })
+
+const route = useRoute()
+
+const items = computed<NavigationMenuItem[]>(() => [{
+  label: '首页',
+  to: '/',
+  active: route.path.endsWith('/')
+}, {
+  label: '人物',
+  to: '/person',
+  active: route.path.startsWith('/person')
+}, {
+  label: '相册',
+  to: '/album',
+  active: route.path.startsWith('/album')
+}, {
+  label: '关于',
+  to: '/about',
+  active: route.path.startsWith('/about')
+}])
 </script>
 
 <template>
   <UApp>
     <UHeader>
       <template #left>
-        <NuxtLink to="/">
-          <LogoPro class="w-auto h-6 shrink-0" />
-        </NuxtLink>
-
-        <TemplateMenu />
+        <img src="/分宜中学.png" alt="分宜中学" class="w-auto h-14 shrink-0">
       </template>
-
+      <UNavigationMenu :items="items" />
       <template #right>
         <UColorModeButton />
 
         <UButton
-          to="https://github.com/nuxt-ui-pro/starter"
+          to="https://github.com/e4s0n"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
           color="neutral"
           variant="ghost"
         />
+      </template><template #body>
+        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
       </template>
     </UHeader>
 
-    <UMain>
+    <UMain class="min-h-[calc(100vh-var(--ui-header-height))]">
       <NuxtPage />
     </UMain>
 
@@ -65,7 +84,7 @@ useSeoMeta({
 
       <template #right>
         <UButton
-          to="https://github.com/nuxt-ui-pro/starter"
+          to="https://github.com/e4s0n"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"

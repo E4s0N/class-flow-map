@@ -128,7 +128,7 @@ const option: ECOption = {
 </script>
 
 <template>
-  <div class="h-128 w-128"> 
+  <div class="h-full w-full"> 
       <VChart :option="option" />
   </div>
   <!-- <NExample
