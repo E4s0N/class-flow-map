@@ -171,11 +171,6 @@
         "name": "黄强",
         "work": "上海",
         "avatar": "/people/黄强.png"
-      },
-      {
-        "name": "胡新全",
-        "work": "上海",
-        "avatar": "/people/胡新全.png"
       }
     ]
   },
@@ -196,6 +191,11 @@
         "name": "陈欣",
         "work": "长沙",
         "avatar": "/people/陈欣.png"
+      },
+      {
+        "name": "胡新全",
+        "work": "长沙",
+        "avatar": "/people/胡新全.png"
       }
     ]
   },

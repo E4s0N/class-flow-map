@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
-    "deploy": "nuxt generate && gh-pages -d .output/public"
+    "deploy": "nohup nuxt generate && gh-pages -d .output/public > deploy.log 2>&1 &"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.57",

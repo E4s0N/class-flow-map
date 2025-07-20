@@ -5,12 +5,14 @@ export default defineNuxtConfig({
     '@nuxt/ui-pro',
     'nuxt-echarts'
   ],
-
   devtools: {
     enabled: true
   },
 
   css: ['~/assets/css/main.css'],
+  colorMode: {
+    preference: 'dark'
+  },
   ui: {
     fonts: false
   },
@@ -27,7 +29,9 @@ export default defineNuxtConfig({
       'TooltipComponent',
       'ToolboxComponent',
       'GeoComponent',
-      'VisualMapComponent'
+      'VisualMapComponent',
+      'DataZoomComponent',
+      'DataZoomSliderComponent'
     ]
   },
 

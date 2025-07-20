@@ -28,7 +28,8 @@ const workRoutes = [
   { from: '分宜中学', to: '黑龙江省' },
   { from: '分宜中学', to: '浙江省' },
   { from: '分宜中学', to: '海南省' },
-  { from: '分宜中学', to: '江苏省' }
+  { from: '分宜中学', to: '江苏省' },
+  { from: '分宜中学', to: '江西省' }
 ]
 
 const linesData = computed(() => {
@@ -137,6 +138,8 @@ watch(
 )
 
 const option = computed(() => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
   return {
     tooltip: {
       trigger: 'item',
@@ -161,8 +164,23 @@ const option = computed(() => {
             { offset: 1, color: 'rgba(0, 102, 154, .4)' }
           ]
         }
-      }
+      },
+      zoom: isMobile ? 3 : 1, // 移动端放大3倍
+      center: isMobile ? [115, 34] : [110, 34] // 可调整中心点，默认显示右侧
     },
+    // dataZoom: isMobile
+    //   ? [
+    //       {
+    //         type: 'slider',
+    //         start: 70,
+    //         end: 100,
+    //         xAxisIndex: 0,
+    //         filterMode: 'none',
+    //         height: 10,
+    //         bottom: 0
+    //       }
+    //     ]
+    //   : [],
     series: [
       {
         type: 'map',
@@ -181,10 +199,12 @@ const option = computed(() => {
           }
         },
         itemStyle: { areaColor: 'transparent' },
+        zoom: isMobile ? 3 : 1, // 移动端放大3倍
+        center: isMobile ? [115, 34] : [110, 34], // 可调整中心点，默认显示右侧
         emphasis: {
-        itemStyle: { areaColor: '#00C16A', borderWidth: 0 },
-        label: { show: true, color: '#fff' }
-      },
+          itemStyle: { areaColor: '#00C16A', borderWidth: 0 },
+          label: { show: true, color: '#fff' }
+        },
         data: provincePeopleData.map((p) => {
           const isHighlighted = workRoutes.some(route => route.to === p.name)
           return {
@@ -236,7 +256,7 @@ const option = computed(() => {
 </script>
 
 <template>
-  <div class="w-100 h-96 md:w-256 md:h-200 mx-auto">
+  <div class="w-96 h-200 md:w-256 md:h-200 mx-auto">
     <VChart
       ref="chartRef"
       :option="option"

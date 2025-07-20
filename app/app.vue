@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -10,7 +11,9 @@ useHead({
   htmlAttrs: {
     lang: 'en'
   }
-})
+
+}
+)
 
 const title = '拾光一班'
 const description = '这里是分宜中学 2014 届高三 1 班的线上家园，是承载着青春记忆与师生情谊的港湾。在班主任张小勇老师的悉心浇灌下，我们曾在分宜中学的教室里并肩奋斗，以浓郁的学风为笔，以团结的情谊为墨，书写下属于青春的炽热篇章。'
@@ -50,14 +53,18 @@ const items = computed<NavigationMenuItem[]>(() => [{
   <UApp>
     <UHeader>
       <template #left>
-        <img src="/分宜中学.png" alt="分宜中学" class="w-auto h-14 shrink-0">
+        <img
+          src="/分宜中学.png"
+          alt="分宜中学"
+          class="w-auto h-14 shrink-0"
+        >
       </template>
       <UNavigationMenu :items="items" />
       <template #right>
         <UColorModeButton />
 
         <UButton
-          to="https://github.com/e4s0n"
+          to="https://github.com/E4s0N/class-flow-map"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
@@ -65,7 +72,11 @@ const items = computed<NavigationMenuItem[]>(() => [{
           variant="ghost"
         />
       </template><template #body>
-        <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <UNavigationMenu
+          :items="items"
+          orientation="vertical"
+          class="-mx-2.5"
+        />
       </template>
     </UHeader>
 
@@ -84,7 +95,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
       <template #right>
         <UButton
-          to="https://github.com/e4s0n"
+          to="https://github.com/E4s0N/class-flow-map"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"
