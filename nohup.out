@@ -128,3 +128,116 @@
 [nitro] ✔ Generated public .output/public
 [nitro] ✔ You can preview this build using npx serve .output/public
 [nuxi] ✔ You can now deploy .output/public to any static hosting!
+[nuxi] Nuxt 4.0.0 with Nitro 2.12.0
+ℹ Nuxt Icon server bundle mode is set to local
+[nuxi] ℹ Building for Nitro preset: static
+ℹ Building client...
+ℹ vite v7.0.4 building for production...
+ℹ transforming...
+ℹ ✓ 1381 modules transformed.
+ℹ rendering chunks...
+ℹ computing gzip size...
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/manifest.json                     4.70 kB │ gzip:   0.66 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/error-500.ClguS_IS.css      1.91 kB │ gzip:   0.73 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/error-404.Ciml-oJA.css      2.43 kB │ gzip:   0.86 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/entry.DQYwFlhA.css        139.48 kB │ gzip:  19.53 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/DlAUqK2U.js                 0.09 kB │ gzip:   0.10 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/F7LJO-of.js                 0.53 kB │ gzip:   0.44 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/CRDkCOlT.js                 1.67 kB │ gzip:   1.16 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/CjwzmX-9.js                 3.09 kB │ gzip:   0.77 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/Bb59N7tu.js                 3.50 kB │ gzip:   1.57 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/DEjjt7tC.js                 3.79 kB │ gzip:   1.71 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/BuhHchBX.js                 6.72 kB │ gzip:   1.91 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/MOg42iCx.js                 7.03 kB │ gzip:   2.30 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/CY1EDciP.js               522.20 kB │ gzip: 168.16 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/BiUJKkxq.js             1,228.96 kB │ gzip: 413.82 kB
+
+ WARN 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+ℹ ✓ built in 17.94s
+✔ Client built in 17982ms
+ℹ Building server...
+ℹ vite v7.0.4 building SSR bundle for production...
+ℹ transforming...
+ℹ ✓ 241 modules transformed.
+ℹ rendering chunks...
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x2)
+
+ℹ ✓ built in 5.05s
+✔ Server built in 5065ms
+[nitro] ℹ Initializing prerenderer
+[nitro] ℹ Prerendering 3 initial routes with crawler
+[nitro]   ├─ /200.html (146ms)
+[nitro]   ├─ /404.html (150ms)
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon simple-icons:nuxtdotjs
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon lucide:menu
+
+[nitro]   ├─ / (2695ms)
+[nitro]   ├─ /_payload.json?c4f561d2-cd40-4fde-a23c-dca769df9c38 (14ms) (skipped)
+[nitro]   ├─ /_payload.json (14ms)
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon lucide:menu
+
+
+ WARN  [Icon] failed to load icon simple-icons:nuxtdotjs
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon lucide:menu
+
+
+ WARN  [Icon] failed to load icon simple-icons:nuxtdotjs
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+
+ WARN  [Icon] failed to load icon lucide:menu
+
+
+ WARN  [Icon] failed to load icon simple-icons:nuxtdotjs
+
+
+ WARN  [Icon] failed to load icon simple-icons:github
+
+[nitro]   ├─ /person (207ms)
+[nitro]   ├─ /person/_payload.json?c4f561d2-cd40-4fde-a23c-dca769df9c38 (5ms) (skipped)
+[nitro]   ├─ /album (213ms)
+[nitro]   ├─ /album/_payload.json?c4f561d2-cd40-4fde-a23c-dca769df9c38 (2ms) (skipped)
+[nitro]   ├─ /about (214ms)
+[nitro]   ├─ /about/_payload.json?c4f561d2-cd40-4fde-a23c-dca769df9c38 (2ms) (skipped)
+[nitro]   ├─ /person/_payload.json (7ms)
+[nitro]   ├─ /album/_payload.json (3ms)
+[nitro]   ├─ /about/_payload.json (3ms)
+[nitro] ℹ Prerendered 10 routes in 8.057 seconds
+[nitro] ✔ Generated public .output/public
+[nitro] ✔ You can preview this build using npx serve .output/public
+[nuxi] ✔ You can now deploy .output/public to any static hosting!

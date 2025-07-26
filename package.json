@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host ",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -16,9 +16,15 @@
     "@iconify-json/lucide": "^1.2.57",
     "@iconify-json/simple-icons": "^1.2.43",
     "@nuxt/ui-pro": "^3.2.0",
+    "@types/three": "^0.178.1",
+    "d3-geo": "^3.1.1",
     "gh-pages": "^6.3.0",
+    "gsap": "^3.13.0",
     "nuxt": "^4.0.0",
-    "nuxt-echarts": "^0.3.3"
+    "nuxt-echarts": "^0.3.3",
+    "sass": "^1.89.2",
+    "three": "^0.178.0",
+    "three.interactive": "^1.8.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.5.2",

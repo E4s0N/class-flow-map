@@ -35,6 +35,10 @@ const items = computed<NavigationMenuItem[]>(() => [{
   to: '/',
   active: route.path.endsWith('/')
 }, {
+  label: '3D地图',
+  to: '/3d',
+  active: route.path.startsWith('/3d')
+}, {
   label: '人物',
   to: '/person',
   active: route.path.startsWith('/person')

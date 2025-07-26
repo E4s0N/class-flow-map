@@ -165,7 +165,7 @@ const option = computed(() => {
           ]
         }
       },
-      zoom: isMobile ? 3 : 1, // 移动端放大3倍
+      zoom: isMobile ? 2.5 : 1, // 移动端放大3倍
       center: isMobile ? [115, 34] : [110, 34] // 可调整中心点，默认显示右侧
     },
     // dataZoom: isMobile
@@ -199,7 +199,7 @@ const option = computed(() => {
           }
         },
         itemStyle: { areaColor: 'transparent' },
-        zoom: isMobile ? 3 : 1, // 移动端放大3倍
+        zoom: isMobile ? 2.5 : 1, // 移动端放大3倍
         center: isMobile ? [115, 34] : [110, 34], // 可调整中心点，默认显示右侧
         emphasis: {
           itemStyle: { areaColor: '#00C16A', borderWidth: 0 },
@@ -256,7 +256,7 @@ const option = computed(() => {
 </script>
 
 <template>
-  <div class="w-96 h-200 md:w-256 md:h-200 mx-auto">
+  <div class="w-96 h-180 md:w-256 md:h-180 mx-auto">
     <VChart
       ref="chartRef"
       :option="option"
