@@ -75,26 +75,62 @@ function getTooltipContent(params: any) {
 
     const cityList = Object.entries(groupedPeople)
       .map(([city, people]) => {
-        const peopleHtml = (people as any[]).map(
-          person => `
-            <div style="display:flex;align-items:center;margin:4px 0;padding-left: 2px;">
-              <img src="${person.avatar}" style="width:28px;height:28px;border-radius:50%;margin-right:4px;" />
-              <span>${person.name}</span>
-            </div>`
-        ).join('')
+        // 修改为一行两个显示
+        const peopleArray = people as any[];
+        let peopleHtml = '<div style="display: flex; flex-wrap: wrap; gap: 4px;">';
+        
+        for (let i = 0; i < peopleArray.length; i += 2) {
+          peopleHtml += '<div style="width: 100%; display: flex; gap: 4px;">';
+          
+          // 第一个元素
+          peopleHtml += `
+            <div style="display: flex; align-items: center; padding: 2px 4px; border-radius: 4px; background: rgba(147, 235, 248, 0.1); ${i + 1 < peopleArray.length || peopleArray.length > 1 ? 'width: calc(50% - 2px)' : 'width: 100%'}">
+              <img src="${peopleArray[i].avatar}" style="width:26px;height:26px;border-radius:50%;margin-right:6px;flex-shrink: 0; border: 1px solid rgba(147, 235, 248, 0.3);" />
+              <span style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${peopleArray[i].name}</span>
+            </div>`;
+          
+          // 第二个元素（如果存在）
+          if (i + 1 < peopleArray.length) {
+            peopleHtml += `
+              <div style="display: flex; align-items: center; padding: 2px 4px; border-radius: 4px; background: rgba(147, 235, 248, 0.1); width: calc(50% - 2px)">
+                <img src="${peopleArray[i + 1].avatar}" style="width:26px;height:26px;border-radius:50%;margin-right:6px;flex-shrink: 0; border: 1px solid rgba(147, 235, 248, 0.3);" />
+                <span style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${peopleArray[i + 1].name}</span>
+              </div>`;
+          } else if (peopleArray.length > 1) {
+            // 大于1个人且为单数时，第二个位置添加空元素占位，保持布局一致
+            peopleHtml += '<div style="width: calc(50% - 2px)"></div>';
+          }
+          
+          peopleHtml += '</div>';
+        }
+        peopleHtml += '</div>';
 
         return `
-          <div style="margin-bottom: 10px; border-left: 2px solid #93EBF8; padding-left: 2px;">
-            <div style="text-align: left; font-weight:bold;color:#00EEFF;margin-bottom:4px;">📍 ${city}</div>
-            <div style="padding-left: 2px;">${peopleHtml}</div>
+          <div style="margin-bottom: 8px; padding-left: 2px;">
+            <div style="text-align: left; font-weight:bold;color:#00EEFF;margin-bottom:6px;font-size:13px;display: flex; align-items: center;">
+              <span style="margin-right: 4px;">📍</span>
+              <span>${city}</span>
+              <span style="margin-left: 6px; font-size: 11px; background: rgba(0, 238, 255, 0.2); padding: 1px 6px; border-radius: 8px;">${peopleArray.length}人</span>
+            </div>
+            <div style="padding-left: 2px; position: relative; margin-bottom: 8px;">
+              <div style="position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, #93EBF8, transparent);"></div>
+              ${peopleHtml}
+            </div>
           </div>`
       })
       .join('')
 
     return `
-      <div style="padding:12px 16px;background:#0F1B2C;color:#fff;border:1px solid #5089EC;box-shadow:0 2px 10px rgba(0,0,0,0.3);border-radius:6px;">
-        <div style="font-size:16px;font-weight:bold;margin-bottom:10px;">${params.name}</div>
-        ${cityList}
+      <div style="padding:10px 14px;background: linear-gradient(135deg, #0F1B2C, #1a2a4a);color:#fff;border:1px solid #5089EC;box-shadow:0 4px 12px rgba(0,0,0,0.4);border-radius:8px;max-width: 240px; backdrop-filter: blur(4px);">
+        <div style="font-size:15px;font-weight:bold;margin-bottom:8px; color: #93EBF8; display: flex; justify-content: space-between; align-items: center;">
+          <span>${params.name}</span>
+          <span style="font-size: 12px; background: rgba(80, 137, 236, 0.3); padding: 2px 8px; border-radius: 10px;">
+            共${provinceData.people.length}人
+          </span>
+        </div>
+        <div style=" padding-right: 2px;">
+          ${cityList}
+        </div>
       </div>`
   }
   return params.name || '未知省份'
@@ -137,6 +173,43 @@ watch(
   }
 )
 
+// 添加移动端 tooltip 位置计算函数
+function mobileTooltipPosition(point, params, dom, rect, size) {
+  // size 包含了视图尺寸 { contentSize: [width, height], viewSize: [width, height] }
+  const x = point[0]
+  const y = point[1]
+  const viewWidth = size.viewSize[0]
+  const viewHeight = size.viewSize[1]
+  const tooltipWidth = size.contentSize[0]
+  const tooltipHeight = size.contentSize[1]
+
+  // 计算 tooltip 的理想位置
+  let posX = x + 10
+  let posY = y - tooltipHeight - 10
+
+  // 防止右侧溢出
+  if (posX + tooltipWidth > viewWidth) {
+    posX = viewWidth - tooltipWidth - 5
+  }
+
+  // 防止左侧溢出
+  if (posX < 5) {
+    posX = 5
+  }
+
+  // 防止顶部溢出
+  if (posY < 5) {
+    posY = y + 10
+  }
+
+  // 防止底部溢出
+  if (posY + tooltipHeight > viewHeight) {
+    posY = viewHeight - tooltipHeight - 5
+  }
+
+  return [posX, posY]
+}
+
 const option = computed(() => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
@@ -144,7 +217,9 @@ const option = computed(() => {
     tooltip: {
       trigger: 'item',
       padding: 0,
-      formatter: getTooltipContent
+      formatter: getTooltipContent,
+      confine: true, // 限制 tooltip 在图表区域内
+      position: isMobile ? mobileTooltipPosition : undefined
     },
     geo: {
       map: 'China',

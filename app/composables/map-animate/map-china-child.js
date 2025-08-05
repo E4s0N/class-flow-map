@@ -1,8 +1,9 @@
-import { Group, RepeatWrapping, LineBasicMaterial, Vector3, SpriteMaterial, Sprite, Color } from "three"
-import { ExtrudeMap } from "./map/extrudeMap"
-import { getBoundBox, emptyObject } from "~/composables/mini3d"
-import { geoMercator } from "d3-geo"
-import { gsap } from "gsap"
+import { Group, RepeatWrapping, LineBasicMaterial, Vector3, SpriteMaterial, Sprite, Color } from 'three'
+import { ExtrudeMap } from './map/extrudeMap'
+import { getBoundBox, emptyObject } from '~/composables/mini3d'
+import { geoMercator } from 'd3-geo'
+import { gsap } from 'gsap'
+
 export class ChildMap {
   constructor(parent, options) {
     this.parent = parent
@@ -18,7 +19,7 @@ export class ChildMap {
       mapData: {},
       geoProjectionCenter: [0, 0],
       geoProjectionScale: 120,
-      geoProjectionTranslate: [0, 0],
+      geoProjectionTranslate: [0, 0]
     }
     this.options = Object.assign({}, defaultOptions, options)
     // 是否点击了
@@ -44,6 +45,7 @@ export class ChildMap {
     this.pointEventElement = []
     this.init()
   }
+
   init() {
     this.createModel()
     this.addLabel()
@@ -52,16 +54,18 @@ export class ChildMap {
     }
     this.addPointEvent()
   }
+
   createModel() {
     let { map } = this.createMap()
     this.setScale(map)
     map.setParent(this.instance)
   }
+
   // 创建省份
   createMap() {
     // 广东地图
     let mapJsonData = this.options.mapData
-    let topNormal = this.parent.assets.instance.getResource("topNormal")
+    let topNormal = this.parent.assets.instance.getResource('topNormal')
     topNormal.wrapS = topNormal.wrapT = RepeatWrapping
 
     // 地图线
@@ -69,7 +73,7 @@ export class ChildMap {
       color: 0x2bc4dc,
       opacity: 0,
       transparent: true,
-      fog: false,
+      fog: false
     })
     let [top, side] = this.parent.createProvinceMaterial()
     let topMaterial = top.clone()
@@ -84,15 +88,15 @@ export class ChildMap {
       topFaceMaterial: topMaterial,
       sideMaterial: sideMaterial,
       lineMaterial: this.parent.mapLineMaterial,
-      renderOrder: 9,
+      renderOrder: 9
     })
     this.areaData = map.coordinates
 
     let { boxSize, box3 } = getBoundBox(map.mapGroup)
     map.mapGroup.children.map((group, index) => {
       group.children.map((mesh) => {
-        if (mesh.type === "Mesh") {
-          mesh.userData.type = "map"
+        if (mesh.type === 'Mesh') {
+          mesh.userData.type = 'map'
           this.eventElement.push(mesh)
           this.parent.calcUv2(mesh.geometry, boxSize.x, boxSize.y, box3.min.x, box3.min.y)
         }
@@ -100,7 +104,7 @@ export class ChildMap {
     })
 
     return {
-      map,
+      map
     }
   }
 
@@ -119,16 +123,16 @@ export class ChildMap {
               obj.renderOrder = 9
             }
           })
-        },
+        }
       })
 
-      this.setLabelMove(mesh.userData.adcode, "down")
-      this.setPointMove(mesh.userData.adcode, "down")
+      this.setLabelMove(mesh.userData.adcode, 'down')
+      this.setPointMove(mesh.userData.adcode, 'down')
     }
     const move = (mesh) => {
       gsap.to(mesh.scale, {
         duration: 0.3,
-        z: 1.5,
+        z: 1.5
       })
 
       this.setLabelMove(mesh.userData.adcode)
@@ -146,41 +150,42 @@ export class ChildMap {
     // 循环添加事件
     this.eventElement.map((mesh) => {
       this.parent.interactionManager.add(mesh)
-      mesh.addEventListener("mousedown", (event) => {
+      mesh.addEventListener('mousedown', (event) => {
         if (this.clicked) return false
         this.clicked = true
         let userData = event.target.parent.userData
         this.parent.history.push(userData)
         this.parent.loadChildMap(userData)
       })
-      mesh.addEventListener("mouseup", (ev) => {
+      mesh.addEventListener('mouseup', (ev) => {
         this.clicked = false
       })
-      mesh.addEventListener("mouseover", (event) => {
+      mesh.addEventListener('mouseover', (event) => {
         if (!objectsHover.includes(event.target.parent)) {
           objectsHover.push(event.target.parent)
         }
 
-        document.body.style.cursor = "pointer"
+        document.body.style.cursor = 'pointer'
         move(event.target.parent)
       })
-      mesh.addEventListener("mouseout", (event) => {
-        objectsHover = objectsHover.filter((n) => n.userData.name !== event.target.parent.userData.name)
+      mesh.addEventListener('mouseout', (event) => {
+        objectsHover = objectsHover.filter(n => n.userData.name !== event.target.parent.userData.name)
         if (objectsHover.length > 0) {
           const mesh = objectsHover[objectsHover.length - 1]
         }
         reset(event.target.parent)
-        document.body.style.cursor = "default"
+        document.body.style.cursor = 'default'
       })
     })
   }
+
   // 添加标点事件
   addPointEvent() {
     let objectsHover = []
 
     this.pointEventElement.map((mesh) => {
       this.parent.interactionManager.add(mesh)
-      mesh.addEventListener("mousedown", (event) => {
+      mesh.addEventListener('mousedown', (event) => {
         if (this.clicked) return false
         this.clicked = true
         let userData = event.target.userData
@@ -191,61 +196,64 @@ export class ChildMap {
           }
         })
       })
-      mesh.addEventListener("mouseup", (ev) => {
+      mesh.addEventListener('mouseup', (ev) => {
         this.clicked = false
       })
-      mesh.addEventListener("mouseover", (event) => {
+      mesh.addEventListener('mouseover', (event) => {
         if (!objectsHover.includes(event.target.parent)) {
           objectsHover.push(event.target.parent)
         }
 
-        document.body.style.cursor = "pointer"
+        document.body.style.cursor = 'pointer'
         let sprite = event.target
         sprite.material = this.pointHoverMaterial.clone()
       })
-      mesh.addEventListener("mouseout", (event) => {
-        objectsHover = objectsHover.filter((n) => n.userData.name !== event.target.parent.userData.name)
+      mesh.addEventListener('mouseout', (event) => {
+        objectsHover = objectsHover.filter(n => n.userData.name !== event.target.parent.userData.name)
         if (objectsHover.length > 0) {
           const mesh = objectsHover[objectsHover.length - 1]
         }
 
-        document.body.style.cursor = "default"
+        document.body.style.cursor = 'default'
         let sprite = event.target
         sprite.material = this.pointDefaultMaterial.clone()
       })
     })
   }
+
   // 设置标签移动
-  setLabelMove(adcode, type = "up") {
+  setLabelMove(adcode, type = 'up') {
     ;[...this.allAreaLabel].map((label) => {
       if (label.userData.adcode === adcode) {
         gsap.to(label.position, {
           duration: 0.3,
-          z: type === "up" ? label.userData.position[2] + 3 / this.scale : label.userData.position[2],
+          z: type === 'up' ? label.userData.position[2] + 3 / this.scale : label.userData.position[2]
         })
       }
     })
   }
+
   // 设置点移动
-  setPointMove(adcode, type = "up") {
+  setPointMove(adcode, type = 'up') {
     this.areaPointGroup.children.map((point) => {
       if (point.userData.adcode === adcode) {
         gsap.to(point.position, {
           duration: 0.3,
-          z: type === "up" ? point.userData.position[2] + 3 / this.scale : point.userData.position[2],
+          z: type === 'up' ? point.userData.position[2] + 3 / this.scale : point.userData.position[2]
         })
       }
     })
   }
+
   addLabel() {
     // 贴图
-    const texture = this.parent.assets.instance.getResource("point")
+    const texture = this.parent.assets.instance.getResource('point')
 
     const material = new SpriteMaterial({
       map: texture,
       color: 0xffffff,
       transparent: true,
-      depthTest: false,
+      depthTest: false
     })
     this.pointDefaultMaterial = material
     this.pointHoverMaterial = material.clone()
@@ -261,13 +269,13 @@ export class ChildMap {
       let infoLabel = this.infoLabel(item, index, new Vector3(x, -y, 0))
       this.allInfoLabel.push(infoLabel)
 
-      //点
+      // 点
       let areaPoint = sprite.clone()
       sprite.material = material.clone()
       areaPoint.position.set(x, -y, 0)
       areaPoint.userData.adcode = item.adcode
 
-      areaPoint.userData.type = "point"
+      areaPoint.userData.type = 'point'
       areaPoint.userData.name = item.name
       areaPoint.userData.position = [x, -y, 0]
       areaPoint.userData.index = index
@@ -277,9 +285,10 @@ export class ChildMap {
     this.setInfoScale()
     this.setPointScale()
   }
+
   infoLabel(data, index, position) {
     let label3d = this.parent.label3d
-    let label = label3d.create("", "info-point", true)
+    let label = label3d.create('', 'info-point', true)
 
     label.init(
       ` <div class="info-point-wrap">
@@ -299,17 +308,18 @@ export class ChildMap {
   `,
       position
     )
-    label3d.setLabelStyle(label, 0.06 / this.scale, "x")
+    label3d.setLabelStyle(label, 0.06 / this.scale, 'x')
     label.setParent(this.infoLabelGroup)
     label.hide()
     return label
   }
+
   // 城市标签
   labelNameStyle(data, index, position) {
     let label3d = this.parent.label3d
-    let label = label3d.create("", "area-name-label", true)
+    let label = label3d.create('', 'area-name-label', true)
     label.init(`<div class="area-name-label-wrap">${data.name}</div>`, position)
-    label3d.setLabelStyle(label, 0.08 / this.scale, "x")
+    label3d.setLabelStyle(label, 0.08 / this.scale, 'x')
     label.setParent(this.areaLabelGroup)
     label.userData.adcode = data.adcode
     label.userData.position = [position.x, position.y, position.z]
@@ -383,6 +393,7 @@ export class ChildMap {
       point.scale.set(0.06 / this.scale, 0.06 / this.scale, 0.06 / this.scale)
     })
   }
+
   geoProjection = (args) => {
     let { geoProjectionScale, geoProjectionTranslate, center } = this.options
     return geoMercator().center(center).scale(geoProjectionScale).translate(geoProjectionTranslate)(args)
@@ -396,14 +407,15 @@ export class ChildMap {
     ;[...this.allAreaLabel, ...this.allInfoLabel].map((label) => {
       label.remove()
     })
-    this.removeElement(".area-name-label")
-    this.removeElement(".info-point")
+    this.removeElement('.area-name-label')
+    this.removeElement('.info-point')
     ;[...this.eventElement, ...this.pointEventElement].map((mesh) => {
       this.parent.interactionManager.remove(mesh)
     })
 
     emptyObject(this.instance)
   }
+
   removeElement(elementClassName) {
     var elements = document.querySelectorAll(elementClassName)
     for (let i = 0; i < elements.length; i++) {

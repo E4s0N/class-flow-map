@@ -463,9 +463,117 @@ export class World extends Mini3d {
     }
   }
 
-  // 添加事件
+  // 在 World 类中添加一个新的方法，用于创建和显示提示
+  // 添加到 World 类中的其他方法之间
+
+  /**
+ * 创建并显示提示信息
+ * @param {Object} mesh - 省份网格对象
+ */
+  // 修改 showTooltip 方法，使其跟随鼠标位置而不是网格中心
+  // 修改 showTooltip 方法，只在地图区域内显示
+  // 修改 showTooltip 方法，只在有人员分布的省份显示
+  // 修改 showTooltip 方法，移除其中的数据检查逻辑
+  showTooltip(mesh) {
+  // 如果已经有提示，先移除它
+    this.hideTooltip()
+
+    // 创建提示元素
+    const tooltip = document.createElement('div')
+    tooltip.className = 'province-tooltip'
+    tooltip.innerHTML = '双击查看详情'
+    tooltip.style.position = 'absolute'
+    tooltip.style.background = 'rgba(0, 0, 0, 0.8)'
+    tooltip.style.color = 'white'
+    tooltip.style.padding = '5px 10px'
+    tooltip.style.borderRadius = '4px'
+    tooltip.style.fontSize = '12px'
+    tooltip.style.pointerEvents = 'none'
+    tooltip.style.zIndex = '1000'
+    tooltip.style.whiteSpace = 'nowrap'
+    tooltip.style.transform = 'translate(-50%, -100%)'
+    tooltip.style.marginTop = '-10px'
+    tooltip.style.boxShadow = '0 2px 4px rgba(0,0,0,0.5)'
+    tooltip.style.transition = 'opacity 0.2s ease'
+    tooltip.style.opacity = '0' // 初始透明度为0
+
+    document.body.appendChild(tooltip)
+    this.currentTooltip = tooltip
+
+    // 更新提示位置的函数
+    const updateTooltipPosition = (event) => {
+      if (!this.currentTooltip) return
+
+      // 使用鼠标事件坐标
+      const x = event.clientX
+      const y = event.clientY
+
+      this.currentTooltip.style.left = `${x}px`
+      this.currentTooltip.style.top = `${y}px`
+    }
+
+    // 添加鼠标移动监听器
+    const mouseMoveHandler = (event) => {
+      updateTooltipPosition(event)
+    }
+
+    // 初始位置更新
+    const initialEvent = {
+      clientX: this.renderer.instance.domElement.getBoundingClientRect().left
+        + this.renderer.instance.domElement.width / 2,
+      clientY: this.renderer.instance.domElement.getBoundingClientRect().top
+        + this.renderer.instance.domElement.height / 2
+    }
+    updateTooltipPosition(initialEvent)
+
+    // 监听鼠标移动事件
+    this.tooltipMouseMoveHandler = mouseMoveHandler
+    document.addEventListener('mousemove', mouseMoveHandler)
+
+    // 渐显提示
+    setTimeout(() => {
+      if (this.currentTooltip) {
+        this.currentTooltip.style.opacity = '1'
+      }
+    }, 10)
+  }
+
+  /**
+ * 隐藏提示信息
+ */
+  // 修改 hideTooltip 方法
+  hideTooltip() {
+    if (this.currentTooltip) {
+    // 渐隐提示
+      this.currentTooltip.style.opacity = '0'
+      // 延迟移除元素，以显示淡出效果
+      setTimeout(() => {
+        if (this.currentTooltip && this.currentTooltip.parentNode) {
+          document.body.removeChild(this.currentTooltip)
+        }
+        this.currentTooltip = null
+      }, 200)
+    }
+
+    // 移除鼠标移动监听器
+    if (this.tooltipMouseMoveHandler) {
+      document.removeEventListener('mousemove', this.tooltipMouseMoveHandler)
+      this.tooltipMouseMoveHandler = null
+    }
+  }
+
+  // 修改 addEvent 方法，添加提示的显示和隐藏
+  // 修改 addEvent 方法，使用更可靠的双击检测方式
+  // 修改 addEvent 方法，添加地图区域判断
+  // 修改 addEvent 方法中 move 函数的调用逻辑
+  // 修改 addEvent 方法，添加地图区域判断
+  // 修改 addEvent 方法中的 move 函数
+  // 修改 addEvent 方法，去除地图区域检查逻辑
   addEvent() {
     let objectsHover = []
+    let lastClickTime = 0
+    let lastClickMesh = null
+    const doubleClickDelay = 300 // 双击时间间隔阈值（毫秒）
 
     const reset = (mesh) => {
       gsap.to(mesh.scale, {
@@ -489,7 +597,10 @@ export class World extends Mini3d {
       this.setScatterMove(mesh.userData.adcode, 'down')
       // 隐藏标牌
       this.hideBadge()
+      // 隐藏提示
+      this.hideTooltip()
     }
+
     const move = (mesh) => {
       gsap.to(mesh.scale, {
         duration: 0.3,
@@ -499,12 +610,22 @@ export class World extends Mini3d {
       this.setGQMove(mesh.userData.adcode)
       this.setLabelMove(mesh.userData.adcode)
       this.setScatterMove(mesh.userData.adcode)
+
+      // 检查该省份是否有人员数据，如果有才显示标牌和tooltip
+      const provinceData = badgesData.find(item =>
+        mesh.userData.name.includes(item.name)
+      )
+
+      if (provinceData) {
       // 显示对应的标牌
-      this.showBadge(mesh.userData)
+        this.showBadge(mesh.userData)
+        // 显示提示（只在有人员分布的省份显示）
+        this.showTooltip(mesh)
+      }
 
       mesh.traverse((obj) => {
         if (obj.isMesh) {
-          // 可以尝试不同的发光颜色和强度
+        // 可以尝试不同的发光颜色和强度
           obj.material[0].emissive.setHex(0x1a3d8f) // 更亮的蓝色发光
           obj.material[0].emissiveIntensity = 2.0 // 更强的发光强度
           obj.renderOrder = 21
@@ -515,17 +636,49 @@ export class World extends Mini3d {
     // 循环添加事件
     this.eventElement.map((mesh) => {
       this.interactionManager.add(mesh)
+
+      // 使用 mousedown 事件来处理单击和双击
       mesh.addEventListener('mousedown', (event) => {
         if (this.clicked || !this.mainSceneGroup.visible) return false
-        this.clicked = true
-        let userData = event.target.parent.userData
-        this.history.push(userData)
 
-        this.loadChildMap(userData)
+        let userData = event.target.parent.userData
+        const currentTime = new Date().getTime()
+
+        // 检查是否为双击（同一网格且在时间阈值内）
+        if (lastClickMesh === mesh && (currentTime - lastClickTime) < doubleClickDelay) {
+        // 双击事件处理
+          lastClickTime = 0
+          lastClickMesh = null
+
+          // 双击直接进入子地图
+          this.clicked = true
+          this.history.push(userData)
+          this.loadChildMap(userData)
+          // 隐藏提示
+          this.hideTooltip()
+          return
+        }
+
+        // 记录单击信息
+        lastClickTime = currentTime
+        lastClickMesh = mesh
+
+        // 检查该省份是否有人员数据
+        const provinceData = badgesData.find(item =>
+          userData.name.includes(item.name)
+        )
+
+        // 如果有人员数据，显示标牌
+        if (provinceData) {
+        // 显示标牌
+          this.showBadge(userData)
+        }
       })
+
       mesh.addEventListener('mouseup', () => {
         this.clicked = false
       })
+
       mesh.addEventListener('mouseover', (event) => {
         if (!objectsHover.includes(event.target.parent)) {
           objectsHover.push(event.target.parent)
@@ -536,17 +689,21 @@ export class World extends Mini3d {
         }
         move(event.target.parent)
       })
+
       mesh.addEventListener('mouseout', (event) => {
         objectsHover = objectsHover.filter(
           n => n.userData.name !== event.target.parent.userData.name
         )
         if (objectsHover.length > 0) {
-          //
+        //
         }
         reset(event.target.parent)
         document.body.style.cursor = 'default'
       })
     })
+
+  // 移除全局鼠标移动和按下监听器，因为我们不再需要检查鼠标是否在地图区域内
+  // 在destroy方法中也需要移除相关代码
   }
 
   /**
@@ -804,9 +961,15 @@ export class World extends Mini3d {
   }
 
   // 创建柱状图
+  // 修改 createBar 方法中的相关部分
+
   createBar() {
     let self = this
     let data = sortByValue(provincesData) // .filter((item, index) => index < 15);
+
+    // 获取有人员分布的省份名称列表
+    const provincesWithPeople = badgesData.map(province => province.name)
+
     const barGroup = new Group()
     this.barGroup = barGroup
 
@@ -820,7 +983,7 @@ export class World extends Mini3d {
     this.allProvinceLabel = []
     this.allProvinceNameLabel = []
     data.map((item, index) => {
-      // 网格
+    // 网格
       let geoHeight = height * (item.value / max)
       // 材质
       let material = new MeshBasicMaterial({
@@ -851,12 +1014,18 @@ export class World extends Mini3d {
       areaBar.userData.adcode = item.adcode
       areaBar.userData.position = [x, -y, this.depth + 0.46]
 
-      let guangQuan = this.createQuan()
-      guangQuan.position.set(x, -y, this.depth + 0.46)
-      guangQuan.userData.name = item.name
-      guangQuan.userData.adcode = item.adcode
-      guangQuan.userData.position = [x, -y, this.depth + 0.46]
-      this.gqGroup.add(guangQuan)
+      // 只在有人员分布的省份创建光圈
+      let guangQuan = null
+      if (provincesWithPeople.includes(item.name)) {
+        guangQuan = this.createQuan()
+        guangQuan.position.set(x, -y, this.depth + 0.46)
+        guangQuan.userData.name = item.name
+        guangQuan.userData.adcode = item.adcode
+        guangQuan.userData.position = [x, -y, this.depth + 0.46]
+        this.gqGroup.add(guangQuan)
+        this.allGuangquan.push(guangQuan)
+      }
+
       let hg = this.createHUIGUANG(geoHeight, index < 3 ? 0xfffef4 : 0x77fbf5)
       areaBar.add(...hg)
 
@@ -873,7 +1042,6 @@ export class World extends Mini3d {
       )
       this.allBar.push(areaBar)
       this.allBarMaterial.push(material)
-      this.allGuangquan.push(guangQuan)
       this.allProvinceLabel.push(barLabel)
       this.allProvinceNameLabel.push(nameLabel)
     })
@@ -1221,8 +1389,10 @@ export class World extends Mini3d {
   }
 
   // 显示指定 userData 的标牌
+  // 修改 showBadge 方法，添加进入子地图的按钮
+  // 修改 showBadge 方法，移除按钮相关代码
   showBadge(userData) {
-    // 隐藏之前显示的标牌
+  // 隐藏之前显示的标牌
     this.hideBadge()
 
     // 查找对应省份的数据
@@ -1237,11 +1407,11 @@ export class World extends Mini3d {
       // 使用省份中心点作为标牌位置，但提高一些确保可见
       let position
       if (userData.centroid) {
-        // 如果有省份中心点坐标，使用该坐标
+      // 如果有省份中心点坐标，使用该坐标
         const [x, y] = this.geoProjection(userData.centroid)
         position = new Vector3(x + 15, -y, this.depth + 10.0) // 增加 Z 值确保在最上层
       } else {
-        // 否则使用默认位置
+      // 否则使用默认位置
         position = new Vector3(0, 0, this.depth + 10.0)
       }
 
@@ -1254,12 +1424,12 @@ export class World extends Mini3d {
         workGroups[person.work].push(person)
       })
 
-      // 构建标牌内容HTML
+      // 构建标牌内容HTML（移除按钮）
       let contentHTML = '<div class="badges-label-wrap">'
 
       // 遍历每个工作地点组
       Object.keys(workGroups).forEach((work, index) => {
-        // 添加分割线（除了第一组）
+      // 添加分割线（除了第一组）
         if (index > 0) {
           contentHTML += '<div class="divider"></div>'
         }
@@ -1271,11 +1441,11 @@ export class World extends Mini3d {
         contentHTML += '<div class="people-grid">'
         workGroups[work].forEach((person) => {
           contentHTML += `
-          <div class="person-item">
-            <img class="person-avatar" src="${person.avatar}" alt="${person.name}" />
-            <div class="person-name">${person.name}</div>
-          </div>
-        `
+        <div class="person-item">
+          <img class="person-avatar" src="${person.avatar}" alt="${person.name}" />
+          <div class="person-name">${person.name}</div>
+        </div>
+      `
         })
         contentHTML += '</div>'
       })
@@ -1511,6 +1681,8 @@ export class World extends Mini3d {
   }
 
   // 销毁
+  // 修改 destroy 方法
+  // 修改 destroy 方法，移除不再需要的监听器
   destroy() {
     super.destroy()
     this.label3d && this.label3d.destroy()
@@ -1518,5 +1690,18 @@ export class World extends Mini3d {
     this.groundMirror && this.groundMirror.dispose()
     this.toastLoading && this.toastLoading.destroy()
     this.childMap && this.childMap.destroy()
+
+    // 移除tooltip相关的监听器（保留这个，因为仍然需要）
+    if (this.tooltipMouseMoveHandler) {
+      document.removeEventListener('mousemove', this.tooltipMouseMoveHandler)
+    }
+
+    // 移除不再需要的全局监听器
+    if (this.globalMouseMoveHandler) {
+      document.removeEventListener('mousemove', this.globalMouseMoveHandler)
+    }
+    if (this.globalMouseDownHandler) {
+      document.removeEventListener('mousedown', this.globalMouseDownHandler)
+    }
   }
 }
