@@ -65,6 +65,10 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </template>
       <UNavigationMenu :items="items" />
       <template #right>
+        <!-- 使用网易云音乐播放器 -->
+        <div class="flex items-center justify-center h-full mr-2">
+          <MusicPlayer />
+        </div>
         <UColorModeButton />
 
         <UButton
