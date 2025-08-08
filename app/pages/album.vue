@@ -32,43 +32,19 @@
         <div
           v-for="(video, index) in videos"
           :key="index"
-          class="video-container bg-black rounded-lg overflow-hidden mb-6 relative"
-          @mouseenter="showControls[index] = true"
-          @mouseleave="showControls[index] = false"
+          class="bg-[var(--ui-bg)] rounded-lg overflow-hidden mb-6"
         >
-          <h4 class="text-white p-2">
+          <h4 class="p-2">
             {{ getVideoTitle(video.src) }}
           </h4>
-          <video
-            :ref="el => setVideoRef(el, index)"
-            controls
-            class="w-full h-auto"
-            :poster="video.poster"
-            @play="onVideoPlay(index)"
-            @pause="onVideoPause(index)"
-            @ended="onVideoEnd(index)"
-            @timeupdate="onTimeUpdate(index)"
-          >
-            <source
+          <div class="flex justify-center items-center aspect-video">
+            <video-player
+              class="w-full h-full object-contain"
               :src="video.src"
-              type="video/mp4"
-            >
-            您的浏览器不支持视频播放。
-          </video>
-          <!-- 自定义播放按钮 -->
-          <div
-            v-show="shouldShowPlayButton(index)"
-            class="custom-play-button absolute inset-0 flex items-center justify-center"
-            @click="togglePlay(index)"
-          >
-            <!-- <div
-              class="w-16 h-16 bg-[var(--color-primary)] bg-opacity-50 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-100 transition"
-            >
-              <UIcon
-                :name="getPlayButtonIcon(index)"
-                class="size-5"
-              />
-            </div> -->
+              controls
+              :loop="true"
+              :volume="0.4"
+            />
           </div>
         </div>
       </div>
@@ -109,6 +85,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, onBeforeUnmount } from 'vue'
+import { VideoPlayer } from '@videojs-player/vue'
+import 'video.js/dist/video-js.css'
 
 // 媒体数据
 const images = ref([
@@ -125,142 +103,35 @@ const images = ref([
     alt: '2012-12-31-坟墓山.jpg'
   },
   {
-    src: '/video/2011-元旦-合唱.mp4',
+    src: 'https://niceimg.com/oss/video/2011-元旦-合唱.mp4',
     alt: '2011-元旦-合唱.mp4'
   },
   {
-    src: '/video/2012-刀哥-小松-骑马舞.mp4',
+    src: 'https://niceimg.com/oss/video/2012-刀哥-小松-骑马舞.mp4',
     alt: '2012-刀哥-小松-骑马舞.mp4'
   },
   {
-    src: '/video/2013-刀哥-狐狸叫.mp4',
+    src: 'https://niceimg.com/oss/video/2013-%E5%88%80%E5%93%A5-%E7%8B%90%E7%8B%B8%E5%8F%AB.mp4',
     alt: '2013-刀哥-狐狸叫.mp4'
   }
 ])
 
-// 视频引用和状态管理
-const videoRefs = ref<HTMLVideoElement[]>([])
-const playingStates = ref<boolean[]>([])
-const showControls = ref<boolean[]>([])
-const hideTimeouts = ref<NodeJS.Timeout[]>([])
-const videoEnded = ref<boolean[]>([])
-const lastTimeUpdate = ref<number[]>([])
-
-// 过滤出视频文件
+// 分离视频和图片
 const videos = computed(() => {
   return images.value.filter(media => isVideo(media.src))
 })
 
 // 判断是否为视频文件
 const isVideo = (src: string) => {
-  return src.endsWith('.mp4') || src.endsWith('.mov') || src.endsWith('.avi')
+  return src.includes('.mp4') || src.includes('.mov') || src.includes('.avi') || src.includes('.m3u8')
 }
 
 // 获取视频标题
 const getVideoTitle = (src: string) => {
-  const fileName = src.split('/').pop() || ''
-  return fileName.replace(/\.[^/.]+$/, '') // 移除扩展名
-}
-
-// 设置视频引用
-const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
-  if (el) {
-    videoRefs.value[index] = el
-    playingStates.value[index] = false
-    showControls.value[index] = true
-    videoEnded.value[index] = false
-    lastTimeUpdate.value[index] = Date.now()
-  }
-}
-
-// 视频播放事件处理
-const onVideoPlay = (index: number) => {
-  playingStates.value[index] = true
-  videoEnded.value[index] = false
-  startHideTimer(index)
-}
-
-// 视频暂停事件处理
-const onVideoPause = (index: number) => {
-  playingStates.value[index] = false
-  clearHideTimer(index)
-}
-
-// 视频结束事件处理
-const onVideoEnd = (index: number) => {
-  playingStates.value[index] = false
-  videoEnded.value[index] = true
-  showControls.value[index] = true
-}
-
-// 视频时间更新事件
-const onTimeUpdate = (index: number) => {
-  // 更新最后更新时间
-  lastTimeUpdate.value[index] = Date.now()
-  
-  // 如果正在播放且控制按钮已显示，则重新开始隐藏计时
-  if (playingStates.value[index] && showControls.value[index]) {
-    startHideTimer(index)
-  }
-}
-
-// 开始隐藏按钮计时器
-const startHideTimer = (index: number) => {
-  clearHideTimer(index)
-  hideTimeouts.value[index] = setTimeout(() => {
-    showControls.value[index] = false
-  }, 2000) // 2秒后隐藏
-}
-
-// 清除隐藏计时器
-const clearHideTimer = (index: number) => {
-  if (hideTimeouts.value[index]) {
-    clearTimeout(hideTimeouts.value[index])
-    hideTimeouts.value[index] = undefined
-  }
-}
-
-// 切换播放状态
-const togglePlay = (index: number) => {
-  const video = videoRefs.value[index]
-  if (video) {
-    if (video.paused) {
-      video.play()
-    } else {
-      video.pause()
-    }
-  }
-}
-
-// 判断是否应该显示播放按钮
-const shouldShowPlayButton = (index: number) => {
-  // 如果视频结束，始终显示按钮
-  if (videoEnded.value[index]) {
-    return true
-  }
-  
-  // 如果鼠标悬停在视频上，显示按钮
-  if (showControls.value[index]) {
-    return true
-  }
-  
-  // 如果视频正在播放但按钮未隐藏，显示按钮
-  if (playingStates.value[index]) {
-    // 检查是否在最近有更新（防止在某些情况下按钮不消失）
-    const timeSinceLastUpdate = Date.now() - lastTimeUpdate.value[index]
-    return timeSinceLastUpdate < 2500 // 给一些缓冲时间
-  }
-  
-  // 默认情况下（暂停状态），显示按钮
-  return !playingStates.value[index]
-}
-
-// 获取播放按钮图标
-const getPlayButtonIcon = (index: number) => {
-  if (videoEnded.value[index]) {
-    return 'i-lucide-rotate-cw' // 重播图标
-  }
-  return playingStates.value[index] ? 'i-lucide-pause' : 'i-lucide-play'
+  const url = new URL(src)
+  const pathname = url.pathname
+  const filename = pathname.substring(pathname.lastIndexOf('/') + 1)
+  return decodeURIComponent(filename)
 }
 
 // 获取图片在图片数组中的索引
@@ -281,6 +152,7 @@ const getImageIndex = (index: number) => {
 // 灯箱相关状态
 const lightboxOpen = ref(false)
 const currentImageIndex = ref(0)
+const hideTimeouts = ref<any[]>([])
 
 // 打开灯箱
 const openLightbox = (index: number) => {
@@ -327,7 +199,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleKeydown)
   // 清理所有计时器
-  hideTimeouts.value.forEach(timeout => {
+  hideTimeouts.value.forEach((timeout) => {
     if (timeout) clearTimeout(timeout)
   })
 })
@@ -342,16 +214,13 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(5px);
 }
 
-.video-container {
-  aspect-ratio: 16/9;
+/* 视频播放器样式覆盖 */
+.aspect-video :deep(.video-js) {
+  width: 100%;
+  height: 100%;
 }
 
-.custom-play-button {
-  background: rgba(0, 0, 0, 0.3);
-  transition: opacity 0.3s ease;
-}
-
-.custom-play-button:hover {
-  background: rgba(0, 0, 0, 0.5);
+.aspect-video :deep(.vjs-tech) {
+  object-fit: contain;
 }
 </style>
