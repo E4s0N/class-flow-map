@@ -603,3 +603,111 @@ Purchase Nuxt UI Pro at https://ui.nuxt.com/pro/pricing to build your app in pro
 [nitro] ✔ Generated public .output/public
 [nitro] ✔ You can preview this build using npx serve .output/public
 [nuxi] ✔ You can now deploy .output/public to any static hosting!
+[nuxi] Nuxt 4.0.0 with Nitro 2.12.0
+ℹ Nuxt Icon server bundle mode is set to local
+[nuxi] ℹ Building for Nitro preset: static
+
+ ERROR  Invalid NUXT_UI_PRO_LICENSE license key.
+Purchase Nuxt UI Pro at https://ui.nuxt.com/pro/pricing to build your app in production.
+ 
+
+
+
+ ERROR  Invalid NUXT_UI_PRO_LICENSE license key.
+Purchase Nuxt UI Pro at https://ui.nuxt.com/pro/pricing to build your app in production.
+
+[nuxi] Nuxt 4.0.0 with Nitro 2.12.0
+ℹ Nuxt Icon server bundle mode is set to local
+[nuxi] ℹ Building for Nitro preset: static
+ℹ Building client...
+ℹ vite v7.0.4 building for production...
+ℹ transforming...
+ℹ ✓ 1650 modules transformed.
+ℹ rendering chunks...
+ℹ computing gzip size...
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/pathLine2._GrqynYO.png                    4.15 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/manifest.json                                   6.67 kB │ gzip:   0.97 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/huiguang.DZ0AatIE.png                     8.02 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/grid.CwTkbZjd.png                         9.20 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/side2.DACH2GNx.png                        9.71 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/gridBlack.D2rBj0ur.png                   13.28 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/rotationBorder3.B1TYmmxk.png             14.00 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/quan.BveJX1zm.png                        66.35 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/rotationBorder1.CAivvQWo.png             84.43 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/gaoguang1.CxP47lMo.png                  176.84 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/top_surface_normal_map2.BDu-Fvdx.jpg    463.03 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/error-500.CHQ9P-Iq.css                    1.91 kB │ gzip:   0.73 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/error-404.BLdVIChQ.css                    2.43 kB │ gzip:   0.86 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/3d.B5LP76n3.css                           4.32 kB │ gzip:   1.29 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/album.BAajdYeJ.css                       47.17 kB │ gzip:  12.60 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/entry.CzmyP1Cr.css                      151.11 kB │ gzip:  21.77 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/BsoUJjdI.js                               1.62 kB │ gzip:   1.14 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/CjwzmX-9.js                               3.09 kB │ gzip:   0.77 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/CtAviDvU.js                               3.47 kB │ gzip:   1.55 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/ws0tXaUv.js                               3.76 kB │ gzip:   1.69 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/DbsaSmmL.js                               6.71 kB │ gzip:   1.91 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/DMx_CLvt.js                               7.01 kB │ gzip:   2.29 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/PEFoNKGc.js                             549.67 kB │ gzip: 177.39 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/B8ZcD_WV.js                             711.14 kB │ gzip: 212.09 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/DbSdS6DN.js                             811.79 kB │ gzip: 233.79 kB
+ℹ ../node_modules/.cache/nuxt/.nuxt/dist/client/_nuxt/D3nDEHyy.js                           1,231.11 kB │ gzip: 414.47 kB
+
+ WARN 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+ℹ ✓ built in 26.57s
+✔ Client built in 26607ms
+ℹ Building server...
+ℹ vite v7.0.4 building SSR bundle for production...
+ℹ transforming...
+ℹ ✓ 308 modules transformed.
+ℹ rendering chunks...
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x2)
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x3)
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x4)
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x5)
+
+
+ WARN  [plugin @tailwindcss/vite:generate:build] Sourcemap is likely to be incorrect: a plugin (@tailwindcss/vite:generate:build) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help (x6)
+
+ℹ ✓ built in 6.60s
+✔ Server built in 6619ms
+[nitro] ℹ Initializing prerenderer
+
+ WARN  "three.interactive" is imported by "node_modules/.cache/nuxt/.nuxt/dist/server/_nuxt/3d-Ge91GrZA.js", but could not be resolved – treating it as an external dependency.
+
+[nitro] ℹ Prerendering 3 initial routes with crawler
+[nitro]   ├─ /200.html (121ms)
+[nitro]   ├─ /404.html (122ms)
+[nitro]   ├─ / (3635ms)
+[nitro]   ├─ /_payload.json?7486dcc2-6302-4e5b-ad9d-c88fe60ef414 (14ms) (skipped)
+[nitro]   ├─ /_payload.json (14ms)
+[nitro]   ├─ /person (386ms)
+[nitro]   ├─ /about (390ms)
+[nitro]   ├─ /person/_payload.json?7486dcc2-6302-4e5b-ad9d-c88fe60ef414 (8ms) (skipped)
+[nitro]   ├─ /about/_payload.json?7486dcc2-6302-4e5b-ad9d-c88fe60ef414 (6ms) (skipped)
+[nitro]   ├─ /person/_payload.json (10ms)
+[nitro]   ├─ /about/_payload.json (6ms)
+[nitro]   ├─ /album (419ms)
+[nitro]   ├─ /3d (419ms)
+[nitro]   ├─ /album/_payload.json?7486dcc2-6302-4e5b-ad9d-c88fe60ef414 (15ms) (skipped)
+[nitro]   ├─ /3d/_payload.json?7486dcc2-6302-4e5b-ad9d-c88fe60ef414 (13ms) (skipped)
+[nitro]   ├─ /album/_payload.json (16ms)
+[nitro]   ├─ /3d/_payload.json (13ms)
+[nitro] ℹ Prerendered 12 routes in 18.435 seconds
+[nitro] ✔ Generated public .output/public
+[nitro] ✔ You can preview this build using npx serve .output/public
+[nuxi] ✔ You can now deploy .output/public to any static hosting!

@@ -103,12 +103,24 @@ const images = ref([
     alt: '2012-12-31-坟墓山.jpg'
   },
   {
+    src: '/photo/班服.jpg',
+    alt: '班服.jpg'
+  },
+  {
+    src: '/photo/班徽.jpeg',
+    alt: '班徽.jpeg'
+  },
+  {
     src: 'https://niceimg.com/oss/video/2011-元旦-合唱.mp4',
     alt: '2011-元旦-合唱.mp4'
   },
   {
     src: 'https://niceimg.com/oss/video/2012-刀哥-小松-骑马舞.mp4',
     alt: '2012-刀哥-小松-骑马舞.mp4'
+  },
+  {
+    src: 'https://niceimg.com/oss/video/2012-刀哥-小松-骑马舞2.mp4',
+    alt: '2012-刀哥-小松-骑马舞2.mp4'
   },
   {
     src: 'https://niceimg.com/oss/video/2013-%E5%88%80%E5%93%A5-%E7%8B%90%E7%8B%B8%E5%8F%AB.mp4',

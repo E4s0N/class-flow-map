@@ -78,9 +78,9 @@ export default [
     name: '海南省',
     people: [
       {
-        name: '边喻琪',
+        name: '边钰琪',
         work: '海南',
-        avatar: '/people/边喻琪.png'
+        avatar: '/people/边钰琪.png'
       }
     ]
   },
@@ -88,9 +88,9 @@ export default [
     name: '江苏省',
     people: [
       {
-        name: '宋无覃',
+        name: '宋吴覃',
         work: '江苏',
-        avatar: '/people/宋无覃.png'
+        avatar: '/people/宋吴覃.png'
       }
     ]
   },

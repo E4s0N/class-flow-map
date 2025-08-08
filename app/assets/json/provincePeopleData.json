@@ -71,6 +71,11 @@
         "name": "陈基勉",
         "work": "深圳",
         "avatar": "/people/陈基勉.png"
+      },
+      {
+        "name": "张小勇",
+        "work": "东莞",
+        "avatar": "/people/张小勇.png"
       }
     ]
   },
@@ -78,19 +83,9 @@
     "name": "海南省",
     "people": [
       {
-        "name": "边喻琪",
+        "name": "边钰琪",
         "work": "海南",
-        "avatar": "/people/边喻琪.png"
-      }
-    ]
-  },
-  {
-    "name": "江苏省",
-    "people": [
-      {
-        "name": "宋无覃",
-        "work": "江苏",
-        "avatar": "/people/宋无覃.png"
+        "avatar": "/people/边钰琪.png"
       }
     ]
   },
@@ -252,6 +247,11 @@
         "work": "宜春",
         "avatar": "/people/李宏.png"
       },
+            {
+        "name": "郭珍妮",
+        "work": "宜春",
+        "avatar": "/people/郭珍妮.png"
+      },
       {
         "name": "赖聪聪",
         "work": "新余",
@@ -264,15 +264,19 @@
       },
       {
         "name": "李松",
-        "work": "分宜",
+        "work": "新余",
         "avatar": "/people/李松.png"
       },
       {
         "name": "欧阳抱朴",
         "work": "分宜",
         "avatar": "/people/欧阳抱朴.png"
+      },
+      {
+        "name": "宋吴覃",
+        "work": "分宜",
+        "avatar": "/people/宋吴覃.png"
       }
-
     ]
   }
 ]
